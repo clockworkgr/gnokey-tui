@@ -1,0 +1,32 @@
+{
+  "name": "gnokey-tui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A friendlier terminal UI wrapper around gno.land's gnokey CLI",
+  "bin": {
+    "gnokey-tui": "bin/gnokey-tui.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsx src/cli.tsx",
+    "dev": "tsx watch src/cli.tsx",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.*"
+  },
+  "dependencies": {
+    "@inkjs/ui": "^2.0.0",
+    "ink": "^6.8.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "ink-testing-library": "^4.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
