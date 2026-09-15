@@ -51,10 +51,15 @@ if (!process.stdin.isTTY) {
 }
 
 function pressEnter(): Promise<void> {
+  // Ink unrefs stdin when it disables raw mode on unmount. Without re-ref'ing,
+  // nothing keeps the event loop alive while we wait, so Node exits with this
+  // await unsettled. Ink refs it again when the app re-mounts.
+  process.stdin.ref();
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   return new Promise<void>((resolve) => {
     rl.question('\n\x1b[2m[press Enter to return to gnokey-tui]\x1b[0m ', () => {
       rl.close();
+      process.stdin.unref();
       resolve();
     });
   });
